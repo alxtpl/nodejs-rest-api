@@ -16,10 +16,10 @@ router.get('/', getContacts);
 
 router.get('/:contactId', getOneContact);
 
-router.delete('/:contactId', deleteContact);
+// router.delete('/:contactId', deleteContact);
 
-router.post('/', addContactValidation, addOneContact);
+// router.post('/', addContactValidation, addOneContact);
 
-router.put('/:contactId', addContactValidation, updateOneContact);
+// router.put('/:contactId', addContactValidation, updateOneContact);
 
 module.exports = router;
