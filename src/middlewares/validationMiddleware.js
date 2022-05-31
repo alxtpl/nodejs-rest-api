@@ -12,6 +12,7 @@ module.exports = {
         .length(10)
         .pattern(/^[0-9]+$/)
         .required(),
+      favorite: Joi.boolean(),
     });
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {

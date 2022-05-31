@@ -5,14 +5,18 @@ const getContacts = async (req, res, next) => {
   res.json({ contacts, status: 'succes' });
 };
 
-const getOneContact = async (req, res, next) => {
+const getOneContact = async (req, res) => {
   const contactById = await Contact.findById(req.params.contactId);
-
+  console.log('contactById:', contactById);
   if (!contactById) {
+    console.log('contactById:', !contactById);
+
     res.status(404).json({
       status: 'error',
       message: 'Not found',
     });
+    console.warn('Contact not found');
+    return;
   }
   res.json({ contactById, status: 'succes' });
 };
@@ -32,12 +36,14 @@ const addOneContact = async (req, res) => {
   const { name, email, phone } = req.body;
 
   if (!name || !email || !phone) {
-    return res.status(400).json({
+    res.status(400).json({
       status: 'error',
       message: 'missing required name field',
     });
+    return;
   }
-  const newContent = await addContact(name, email, phone);
+  console.log('req.body:', req.body);
+  const newContent = await Contact.create(req.body);
   res.status(201).json({
     massage: newContent,
     status: 'succes',
